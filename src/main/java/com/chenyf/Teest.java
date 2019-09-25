@@ -15,15 +15,15 @@ public class Teest {
 
 
     public static void main(String[] args) throws IOException {
-        File file = new File("F:\\天吴\\data\\aaa.xlsx");
+        File file = new File("./test.xlsx");
 
         FileInputStream fis = new FileInputStream(file);
 
         Workbook wb = WorkbookFactory.create(fis);
         Sheet sheet = wb.getSheetAt(0);
 
-        Row row = sheet.getRow(5);
-        Cell cell = row.getCell(5);
+        Row row = sheet.getRow(0);
+        Cell cell = row.getCell(0);
 
         System.out.println(cell.getCellType());
 

@@ -18,10 +18,11 @@ import java.util.List;
  **/
 public class ExcelUtil {
 
-    public <T> List<T> importExcel(File file, Class<T> clazz) {
+    public <T> List<T> importExcel(InputStream inputStream, Class<T> clazz) {
         Workbook wb = null;
+
         try {
-            wb = WorkbookFactory.create(file);
+            wb = WorkbookFactory.create(inputStream);
         } catch (IOException e) {
             throw new RuntimeException("excel import error: ", e);
         }
@@ -31,11 +32,10 @@ public class ExcelUtil {
         return importExcel(wb, clazz);
     }
 
-    public <T> List<T> importExcel(InputStream inputStream, Class<T> clazz) {
+    public <T> List<T> importExcel(File file, Class<T> clazz) {
         Workbook wb = null;
-
         try {
-            wb = WorkbookFactory.create(inputStream);
+            wb = WorkbookFactory.create(file);
         } catch (IOException e) {
             throw new RuntimeException("excel import error: ", e);
         }
@@ -81,28 +81,30 @@ public class ExcelUtil {
                 T obj = clazz.newInstance();
                 if (row != null && fields.size() > 0) {
                     for (Field field : fields) {
-
                         ExcelField ef = field.getAnnotation(ExcelField.class);
                         int col = ef.col();
-
-
                         Cell cell = row.getCell(col);
-
-
-
-
-
                         Object fieldType = field.getType();
                         switch (cell.getCellType()) {
                             case NUMERIC:
                                 if (java.util.Date.class == fieldType) {
                                     field.set(obj, cell.getDateCellValue());
-                                } else if (Double.class == fieldType || Double.TYPE == fieldType){
-
+                                } else if (String.class == fieldType) {
+                                    field.set(obj, String.valueOf(cell.getNumericCellValue()));
+                                } else {
+                                    field.set(obj, cell.getNumericCellValue());
+                                }
+                                break;
+                            case STRING:
+                                if (String.class == fieldType) {
+                                    field.set(obj, cell.getStringCellValue());
+                                } else if (Date.class == fieldType) {
+                                    field.set(obj, cell.getDateCellValue());
+                                } else if (Boolean.class == fieldType || Boolean.TYPE == fieldType) {
+                                    field.set(obj, cell.getBooleanCellValue());
+                                } else {
                                 }
 
-
-                                break;
                             default:
                                 break;
                         }
@@ -110,31 +112,6 @@ public class ExcelUtil {
                         if (Date.class == field.getType()) {
                             field.set(obj, cell.getDateCellValue());
                         }
-
-//                        if (String.class == field.getType()) {
-//                            field.set(obj, cell.getStringCellValue());
-//                        } else if ((Integer.TYPE == field.getType()) || (Integer.class == field.getType())) {
-//                            field.set(obj, cell.getNumericCellValue());
-//                        } else if ((Long.TYPE == field.getType()) || (Long.class == field.getType())) {
-//                            field.set(obj, cell.getNumericCellValue());
-//                        } else if ((Float.TYPE == field.getType()) || (Float.class == field.getType())) {
-//                            field.set(obj, cell.getNumericCellValue());
-//                        } else if ((Short.TYPE == field.getType()) || (Short.class == field.getType())) {
-//                            field.set(obj, cell.getNumericCellValue());
-//                        } else if ((Double.TYPE == field.getType()) || (Double.class == field.getType())) {
-//                            field.set(obj, cell.getNumericCellValue());
-//                        } else if (Character.TYPE == field.getType()) {
-//                            cell.get
-//                            if ((c != null) && (c.length() > 0)) {
-//                                field.set(obj, Character
-//                                        .valueOf(c.charAt(0)));
-//                            }
-//                        } else if () {
-//
-//                        }
-//
-//
-//                        field.set(obj, cell.getStringCellValue());
                     }
                 }
                 resultList.add(obj);

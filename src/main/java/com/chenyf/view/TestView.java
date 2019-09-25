@@ -13,16 +13,18 @@ public class TestView {
 
     @ExcelField(name = "a", col = 0)
     private String a;
-    @ExcelField(name = "b", col = 1)
+    //@ExcelField(name = "b", col = 0)
     private Integer b;
-    @ExcelField(name = "c", col = 2)
+    //@ExcelField(name = "c", col = 0)
     private Long c;
-    @ExcelField(name = "d", col = 3)
+    //@ExcelField(name = "d", col = 0)
     private Double d;
-    @ExcelField(name = "e", col = 4)
+    //@ExcelField(name = "e", col = 0)
     private Boolean e;
-    @ExcelField(name = "f", col = 5)
+    //@ExcelField(name = "f", col = 0)
     private Date date;
+    //@ExcelField(name = "g", col = 0)
+    private Float g;
 
     public String getA() {
         return a;
@@ -62,5 +64,21 @@ public class TestView {
 
     public void setE(Boolean e) {
         this.e = e;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Float getG() {
+        return g;
+    }
+
+    public void setG(Float g) {
+        this.g = g;
     }
 }

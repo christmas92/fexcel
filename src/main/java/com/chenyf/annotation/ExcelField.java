@@ -26,4 +26,10 @@ public @interface ExcelField {
      */
     int col() default 0;
 
+    /**
+     * 格式化
+     * @return
+     */
+    String format() default "";
+
 }

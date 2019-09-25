@@ -88,16 +88,18 @@ public class ExcelUtil {
 
                         Cell cell = row.getCell(col);
 
-                        if (java.util.Date.class == field.getType()) {
-                            Date value = cell.getDateCellValue();
 
 
-                        }
 
 
+                        Object fieldType = field.getType();
                         switch (cell.getCellType()) {
                             case NUMERIC:
+                                if (java.util.Date.class == fieldType) {
+                                    field.set(obj, cell.getDateCellValue());
+                                } else if (Double.class == fieldType || Double.TYPE == fieldType){
 
+                                }
 
 
                                 break;

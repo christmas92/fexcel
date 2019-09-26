@@ -41,10 +41,10 @@ public class ExcelImportUtil {
         try {
             wb = WorkbookFactory.create(inputStream);
         } catch (IOException e) {
-            throw new RuntimeException("excel import error: ", e);
+            throw new RuntimeException("excel eimport error: ", e);
         }
         if (wb == null) {
-            throw new RuntimeException("excel import error: Workbook is not existed");
+            throw new RuntimeException("excel eimport error: Workbook is not existed");
         }
         return importExcel(wb, clazz);
     }
@@ -54,10 +54,10 @@ public class ExcelImportUtil {
         try {
             wb = WorkbookFactory.create(file);
         } catch (IOException e) {
-            throw new RuntimeException("excel import error: ", e);
+            throw new RuntimeException("excel eimport error: ", e);
         }
         if (wb == null) {
-            throw new RuntimeException("excel import error: Workbook is not existed");
+            throw new RuntimeException("excel eimport error: Workbook is not existed");
         }
         return importExcel(wb, clazz);
     }
@@ -65,7 +65,7 @@ public class ExcelImportUtil {
     private <T> List<T> importExcel(Workbook workbook, Class<T> clazz) {
         Sheet sheet = workbook.getSheetAt(0);
         if (sheet == null) {
-            throw new RuntimeException("excel import error: sheet is not existed");
+            throw new RuntimeException("excel eimport error: sheet is not existed");
         }
 
         List<T> resultList = new ArrayList<>();
@@ -153,11 +153,11 @@ public class ExcelImportUtil {
                 }
                 resultList.add(obj);
             } catch (InstantiationException e) {
-                throw new RuntimeException("excel import error: ", e);
+                throw new RuntimeException("excel eimport error: ", e);
             } catch (IllegalAccessException e) {
-                throw new RuntimeException("excel import error: ", e);
+                throw new RuntimeException("excel eimport error: ", e);
             } catch (ParseException e) {
-                throw new RuntimeException("excel import error: ", e);
+                throw new RuntimeException("excel eimport error: ", e);
             }
         }
         return resultList;

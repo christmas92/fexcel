@@ -7,23 +7,16 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Hello world!
  */
 public class App {
-    public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("/Users/chenyifei/IdeaProjects/fexcel/test.xlsx");
+    public static void main(String[] args) throws IOException {
 
-        FileInputStream fis = new FileInputStream(file);
 
-        ExcelUtil excelUtil = new ExcelUtil();
-
-        List<TestView> list = excelUtil.importExcel(file, TestView.class);
-
-        Gson gson = new Gson();
-        System.out.println(gson.toJson(list));
 
     }
 }

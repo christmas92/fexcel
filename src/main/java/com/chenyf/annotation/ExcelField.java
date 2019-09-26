@@ -30,6 +30,6 @@ public @interface ExcelField {
      * 格式化
      * @return
      */
-    String format() default "";
+    String pattern() default "";
 
 }
